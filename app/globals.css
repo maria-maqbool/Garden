@@ -1,3 +1,49 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+ .slider {
+  -webkit-appearance: none;
+  width: 75%;
+  height: 5px;
+  background: #d3d3d3;
+  outline: none;
+  -webkit-transition: .2s;
+  /* transition: opacity .2s; */
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%; 
+  background: #71A32F;
+  border: none;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: none;
+  background: #71A32F;
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-progress {
+    background-color: #71A32F; /* Color of the selected range */
+  }
+
+
+/* Remove arrows from number input */
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* Remove arrows from Chrome */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
