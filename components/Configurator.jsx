@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import useGardenStore from "@/stores/store";
 
@@ -19,10 +19,148 @@ const Configurator = () => {
         </div>
       </div>
       <div className="">
+        <Title />
         <Size />
-        <Size />
-        <Size />
+        <Quantity />
+        <Color />
+        <PlanterSize />
       </div>
+    </div>
+  );
+};
+const Quantity = () => {
+  const [selectedOption, setSelectedOption] = useState(2);
+  const setQuantity = useGardenStore((state) => state.setQuantity);
+  useEffect(() => {
+    setQuantity(selectedOption)
+  }, [])
+  const quantities = [2, 4, 6, 8, 10, 12];
+
+  return (
+    <Section title={"number of Quantity of planter"}>
+      <div className="flex flex-col gap-2 mt-4 text-gray-500">
+        Choose an option
+        <div className="flex cursor-pointer">
+          {quantities.map((value, index) => {
+            return (
+              <div
+                key={index}
+                className={`${selectedOption === value ? "bg-brGreen text-white" : "text-gray-700"} rounded-full px-3 py-1 text-sm font-semibold  mr-2`}
+                onClick={() => {
+                  setSelectedOption(value);
+                  setQuantity(value);
+                }}
+              >
+                {value}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+const PlanterSize = () => {
+  const [selectedOption, setSelectedOption] = useState(2);
+
+  const quantities = [
+    "Small (22cm width)",
+    "Medium (34cm width)",
+    "Large (45cm width)",
+  ];
+  return (
+    <Section title={"planter size"}>
+      <div className="flex flex-col gap-2 mt-4 text-gray-500">
+        <div className="cursor-pointer">
+          {quantities.map((value, index) => {
+            return (
+              <div
+                key={index}
+                className={`${selectedOption === value ? "text-brGreen" : "text-gray-700"} rounded-full  py-1  `}
+                onClick={() => setSelectedOption(value)}
+              >
+                {value}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+const Color = () => {
+  const setColor = useGardenStore(state => state.setColor);
+  const [selected, setSelected] = useState("black")
+  const colors = [
+    { name: "black", hex: "#000" },
+    { name: "Terracotta", hex: "#71A32F" },
+    { name: "Stone", hex: "#A8A5A1" },
+  ];
+  const colorEl = useRef(null)
+  return (
+    <Section title={"planter color"}>
+      <div className="flex gap-8 mt-4">
+        {colors.map((color, index) => {
+          return (
+            <div className="flex flex-col gap-2 justify-center items-center" onClick={() => {setColor(color.hex); setSelected(color.name)}}>
+              <div
+                className={ `w-12 h-12 rounded-full ${selected === color.name ? "border-4 border-brGreen": ""}` }
+                key={index}
+                style={{ backgroundColor: color.hex }}
+              />
+              <p className="text-gray-500 capitalize">{color.name}</p>
+            </div>
+          );
+        })}
+
+        <div className="flex flex-col gap-2 justify-center items-center" onClick={() => {
+          colorEl.current.click()
+        }}>
+          <input type="color" hidden ref={colorEl} onChange={value => {setColor(value.target.value); setSelected(null)}}/>
+          <Image
+            src={"/icons/add.svg"}
+            width={30}
+            height={30}
+            alt="add"
+            className="w-12 h-12 rounded-full cursor-pointer"
+          />
+
+          <p className="text-gray-500 capitalize">other</p>
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+const Title = () => {
+  const [title, setTitle] = useState("planter 1");
+  // const [shouldChange, setShouldChange] = useState(false);
+  const inputEl = useRef(null);
+  return (
+    <div
+      className={`w-full min-h-[10%] flex justify-between items-center border-b-2 border-y-gray-300 py-4 p-4`}
+    >
+      <div className="flex gap-8">
+        <div className="text-xl text-gray-600 capitalize">Title</div>
+        <input
+          type="text"
+          className="text-xl capitalize text-brGreen"
+          value={title}
+          disabled={false}
+          ref={inputEl}
+          onChange={(value) => setTitle(value.target.value)}
+        />
+      </div>
+      <Image
+        src={"/icons/edit.svg"}
+        width={30}
+        height={30}
+        alt="edit"
+        className="cursor-pointer"
+        onClick={() => inputEl.current.focus()}
+      />
     </div>
   );
 };
