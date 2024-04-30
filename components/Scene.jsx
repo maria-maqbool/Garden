@@ -1,29 +1,43 @@
 "use client";
 import useGardenStore from "@/stores/store";
 import {
-  Box,
-  Center,
+  DragControls,
   Environment,
   OrbitControls,
-  PresentationControls,
+  OrthographicCamera,
+  Sky,
   useTexture,
 } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useGraph } from "@react-three/fiber";
 import React from "react";
 import { Planter } from "./Planter";
-import * as THREE from "three";
 
 const Scene = () => {
+  const garden = useGardenStore();
   return (
-    <div className="flex-grow w-3/5">
-      <Canvas camera={{ position: [0, 10, 25] }}>
-        <OrbitControls />
-        <Plants />
-        <Ground />
+    <div className="flex-grow w-5/5 -z-0">
+      <Canvas camera={{ position: [0, 10, 45], zoom: 2 }}>
+        <OrbitControls makeDefault />
 
+        <Plants />
+        {/* </DragControls> */}
+        <Ground />
+        <Aisle
+          position={[garden.width, 0, 0]}
+          scale={[1, 1, garden.height / 10]}
+        />
+        <Sky/>
         <Environment preset="forest" />
       </Canvas>
     </div>
+  );
+};
+const Aisle = (props) => {
+  return (
+    <mesh {...props}>
+      <boxGeometry args={[10, 0.1, 10]} />
+      <meshStandardMaterial color={"brown"} />
+    </mesh>
   );
 };
 const Ground = () => {
@@ -40,8 +54,20 @@ const Plants = () => {
   const garden = useGardenStore();
   return (
     <>
-      {Array.from({ length: garden.quantity }).map((_val, index) => {
-        return <Planter position={[2 * index - ( garden.width / 2) + 1, 0.6, 0]} scale={0.4} />;
+      {Array.from({ length: 2 }).map((_val, index) => {
+        return (
+          <DragControls
+            // axisLock={"x"}
+            dragLimits={[
+              [-Infinity, Infinity],
+              [0, 0],
+              [-Infinity, Infinity],
+            ]}
+            
+          >
+            <Planter position={[garden.width, 0.6, 2 * index]} scale={0.4} />
+          </DragControls>
+        );
       })}
     </>
   );

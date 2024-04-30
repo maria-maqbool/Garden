@@ -5,7 +5,7 @@ import useGardenStore from "@/stores/store";
 
 const Configurator = () => {
   return (
-    <div className="absolute right-20 bottom-20 top-40 w-1/4 bg-white rounded-3xl">
+    <div className="absolute right-20 bottom-20 top-40 w-1/4 bg-white rounded-3xl z-10">
       <div className="w-full h-[10%] bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-2xl">
         Garden Size
         <div className="flex gap-2">
