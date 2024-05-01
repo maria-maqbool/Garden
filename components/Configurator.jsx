@@ -1,11 +1,11 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import { useStateStore } from "@/stores/store";
 import Image from "next/image";
-import useGardenStore from "@/stores/store";
+import React, { useEffect, useRef, useState } from "react";
 
 const Configurator = () => {
   return (
-    <div className="absolute right-20 bottom-20 top-40 w-1/4 bg-white rounded-3xl z-10">
+    <div className="absolute right-20 bottom-20 top-40 z-10 w-1/4 bg-white rounded-3xl">
       <div className="w-full h-[10%] bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-2xl">
         Garden Size
         <div className="flex gap-2">
@@ -20,20 +20,37 @@ const Configurator = () => {
       </div>
       <div className="">
         <Title />
-        <Size />
-        <Quantity />
+        {/* <Size /> */}
+        {/* <Quantity /> */}
         <Color />
-        <PlanterSize />
+        {/* <PlanterSize /> */}
       </div>
+
+      <Add />
     </div>
   );
 };
+const Add = () => {
+  const state = useStateStore();
+  return (
+    <button
+      className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
+      onClick={() => {
+        state.addPlanter('plant2' ,'yellow', state.activeIndex + 1);
+      }}
+    >
+      Add Planter
+      <Image src={"/icons/add-white.svg"} width={30} height={30} alt="add" />
+    </button>
+  );
+};
 const Quantity = () => {
+  const garden = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
-  const setQuantity = useGardenStore((state) => state.setQuantity);
+  const setQuantity = garden.planters[garden.index]((state) => state.setQuantity);
   useEffect(() => {
-    setQuantity(selectedOption)
-  }, [])
+    setQuantity(selectedOption);
+  }, []);
   const quantities = [2, 4, 6, 8, 10, 12];
 
   return (
@@ -62,6 +79,8 @@ const Quantity = () => {
 };
 
 const PlanterSize = () => {
+
+  const garden = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
 
   const quantities = [
@@ -91,22 +110,29 @@ const PlanterSize = () => {
 };
 
 const Color = () => {
-  const setColor = useGardenStore(state => state.setColor);
-  const [selected, setSelected] = useState("black")
+
+  const {setPlantColor} = useStateStore();
+  const [selected, setSelected] = useState("black");
   const colors = [
     { name: "black", hex: "#000" },
     { name: "Terracotta", hex: "#71A32F" },
     { name: "Stone", hex: "#A8A5A1" },
   ];
-  const colorEl = useRef(null)
+  const colorEl = useRef(null);
   return (
     <Section title={"planter color"}>
       <div className="flex gap-8 mt-4">
         {colors.map((color, index) => {
           return (
-            <div className="flex flex-col gap-2 justify-center items-center" onClick={() => {setColor(color.hex); setSelected(color.name)}}>
+            <div
+              className="flex flex-col gap-2 justify-center items-center"
+              onClick={() => {
+                setPlantColor(color.hex);
+                setSelected(color.name);
+              }}
+            >
               <div
-                className={ `w-12 h-12 rounded-full ${selected === color.name ? "border-4 border-brGreen": ""}` }
+                className={`w-12 h-12 rounded-full ${selected === color.name ? "border-4 border-brGreen" : ""}`}
                 key={index}
                 style={{ backgroundColor: color.hex }}
               />
@@ -115,10 +141,21 @@ const Color = () => {
           );
         })}
 
-        <div className="flex flex-col gap-2 justify-center items-center" onClick={() => {
-          colorEl.current.click()
-        }}>
-          <input type="color" hidden ref={colorEl} onChange={value => {setColor(value.target.value); setSelected(null)}}/>
+        <div
+          className="flex flex-col gap-2 justify-center items-center"
+          onClick={() => {
+            colorEl.current.click();
+          }}
+        >
+          <input
+            type="color"
+            hidden
+            ref={colorEl}
+            onChange={(value) => {
+              setPlantColor(value.target.value);
+              setSelected(null);
+            }}
+          />
           <Image
             src={"/icons/add.svg"}
             width={30}
@@ -165,8 +202,8 @@ const Title = () => {
   );
 };
 const Size = () => {
-  const setGardenWidth = useGardenStore((state) => state.changeWidth);
-  const setGardenHeight = useGardenStore((state) => state.changeHeight);
+  const setGardenWidth = useStateStore((state) => state.changeWidth);
+  const setGardenHeight = useStateStore((state) => state.changeHeight);
   const [width, setWidth] = useState(20);
   const handleWidthChange = (value) => {
     setWidth(value.target.value);

@@ -1,15 +1,18 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
-import useGardenStore from "@/stores/store";
+import { useStateStore } from "@/stores/store";
 import { Base } from "./Base";
 
-export function Planter(props) {
+const index = 0;
+export function Planter({ index, color, ...props }) {
+  const {setActive} = useStateStore();
   return (
-    <group position={[0, 1.3, 0]} {...props}>
+    <group position={[0, 1.3, 0]} {...props} onClick={ () => setActive(index)} >
       {Array.from({ length: 5 }).map((_val, index) => {
         return (
           <SinglePlanter
+            color={color}
             position={[0, index * 1.99 + 1, 0]}
             rotation={[0, index % 2 === 0 ? Math.PI / 4 : 0, 0]}
           />
@@ -19,9 +22,8 @@ export function Planter(props) {
     </group>
   );
 }
-export function SinglePlanter(props) {
+export function SinglePlanter({ color, ...props }) {
   const { nodes, materials } = useGLTF("/planter.glb");
-  const color = useGardenStore((state) => state.color);
   return (
     <group {...props} dispose={null}>
       <mesh
