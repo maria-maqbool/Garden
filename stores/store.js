@@ -3,9 +3,9 @@ import { create } from "zustand";
 const initialState = [{ name: "plant1", color: "green" }];
 export const useStateStore = create((set) => ({
   garden: initialState,
-  addPlanter: (name, color, index) =>
+  addPlanter: (name, color,size, index) =>
     set((state) => {
-      return { garden: [...state.garden, { name, color }], activeIndex: index };
+      return { garden: [...state.garden, { name, color, size }], activeIndex: index };
     }),
   setPlantColor: (color) =>
     set((state) => {
@@ -13,6 +13,18 @@ export const useStateStore = create((set) => ({
       updatedPlants[state.activeIndex] = {
         ...updatedPlants[state.activeIndex],
         color,
+      };
+      return {
+        garden: updatedPlants,
+      };
+    }),
+
+  setPlantSize: (size) =>
+    set((state) => {
+      const updatedPlants = [...state.garden];
+      updatedPlants[state.activeIndex] = {
+        ...updatedPlants[state.activeIndex],
+        size: size,
       };
       return {
         garden: updatedPlants,

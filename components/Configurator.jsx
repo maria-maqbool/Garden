@@ -20,10 +20,10 @@ const Configurator = () => {
       </div>
       <div className="">
         <Title />
-        {/* <Size /> */}
+        <Size />
         {/* <Quantity /> */}
         <Color />
-        {/* <PlanterSize /> */}
+        <PlanterSize />
       </div>
 
       <Add />
@@ -36,7 +36,7 @@ const Add = () => {
     <button
       className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
       onClick={() => {
-        state.addPlanter('plant2' ,'yellow', state.activeIndex + 1);
+        state.addPlanter("plant2", "yellow", 1, state.activeIndex + 1);
       }}
     >
       Add Planter
@@ -47,7 +47,9 @@ const Add = () => {
 const Quantity = () => {
   const garden = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
-  const setQuantity = garden.planters[garden.index]((state) => state.setQuantity);
+  const setQuantity = garden.planters[garden.index](
+    (state) => state.setQuantity,
+  );
   useEffect(() => {
     setQuantity(selectedOption);
   }, []);
@@ -79,14 +81,13 @@ const Quantity = () => {
 };
 
 const PlanterSize = () => {
-
-  const garden = useStateStore();
+  const { setPlantSize } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
 
   const quantities = [
-    "Small (22cm width)",
-    "Medium (34cm width)",
-    "Large (45cm width)",
+    { title: "Small (22cm width)", scale: 0.5 },
+    { title: "Medium (34cm width)", scale: 0.8 },
+    { title: "Large (45cm width)", scale: 1.0 }
   ];
   return (
     <Section title={"planter size"}>
@@ -96,10 +97,13 @@ const PlanterSize = () => {
             return (
               <div
                 key={index}
-                className={`${selectedOption === value ? "text-brGreen" : "text-gray-700"} rounded-full  py-1  `}
-                onClick={() => setSelectedOption(value)}
+                className={`${selectedOption === value.title ? "text-brGreen" : "text-gray-700"} rounded-full  py-1  `}
+                onClick={() => {
+                  setSelectedOption(value.title);
+                  setPlantSize(value.scale);
+                }}
               >
-                {value}
+                {value.title}
               </div>
             );
           })}
@@ -110,8 +114,7 @@ const PlanterSize = () => {
 };
 
 const Color = () => {
-
-  const {setPlantColor} = useStateStore();
+  const { setPlantColor } = useStateStore();
   const [selected, setSelected] = useState("black");
   const colors = [
     { name: "black", hex: "#000" },
@@ -132,7 +135,7 @@ const Color = () => {
               }}
             >
               <div
-                className={`w-12 h-12 rounded-full ${selected === color.name ? "border-4 border-brGreen" : ""}`}
+                className={`w-12 h-12 rounded-full ${selected === color.name ? "border-4 border-white" : ""}`}
                 key={index}
                 style={{ backgroundColor: color.hex }}
               />

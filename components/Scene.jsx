@@ -64,7 +64,7 @@ const Plants = () => {
           >
             <Planter
               position={[garden.width, 0.6, 2 * index]}
-              scale={0.4}
+              scale={garden.garden[index].size * 0.4}
               color={garden.garden[index].color}
               index={index}
             />
