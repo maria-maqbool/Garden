@@ -16,6 +16,10 @@ export function Planter({ index, color, ...props }) {
             position={[0, index * 1.99 + 1, 0]}
             rotation={[0, index % 2 === 0 ? Math.PI / 4 : 0, 0]}
           />
+          // <mesh scale={2}>
+          //   <boxGeometry/>
+          //   <meshStandardMaterial color={color}/>
+          // </mesh>
         );
       })}
       <Base position={[-0.3, 0, 0.2]} />

@@ -1,11 +1,16 @@
 import { create } from "zustand";
 
 const initialState = [{ name: "plant1", color: "green" }];
-export const useStateStore = create((set) => ({
+export const useStateStore = create((set, get) => ({
   garden: initialState,
-  addPlanter: (name, color,size, index) =>
+  addPlanter: (name, color, size, index) =>
     set((state) => {
-      return { garden: [...state.garden, { name, color, size }], activeIndex: index };
+      if (state.garden.length > state.maxQuantity)
+        return { garden: state.garden };
+      return {
+        garden: [...state.garden, { name, color, size }],
+        activeIndex: index,
+      };
     }),
   setPlantColor: (color) =>
     set((state) => {
@@ -34,6 +39,8 @@ export const useStateStore = create((set) => ({
   setActive: (index) => set(() => ({ activeIndex: index })),
   width: 20,
   height: 20,
+  maxQuantity: 2,
+  setMaxQuantity: (quantity) => set(() => ({ maxQuantity: quantity })),
   changeHeight: (height) => set(() => ({ height })),
   changeWidth: (width) => set(() => ({ width })),
 }));

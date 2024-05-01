@@ -21,10 +21,6 @@ const Scene = () => {
         <Plants />
         {/* </DragControls> */}
         <Ground />
-        <Aisle
-          position={[garden.width, 0, 0]}
-          scale={[1, 1, garden.height / 10]}
-        />
         <Sky />
         <Environment preset="forest" />
       </Canvas>
@@ -44,7 +40,7 @@ const Ground = () => {
   const grass = useTexture("/grass.jpg");
   return (
     <mesh scale={[garden.width, 1, garden.height]}>
-      <boxGeometry args={[1, 0.3, 1]} />
+      <boxGeometry args={[1, 0.6, 1]} />
       <meshBasicMaterial map={grass} />
     </mesh>
   );
@@ -53,7 +49,10 @@ const Plants = () => {
   const garden = useStateStore();
   return (
     <>
-      {Array.from({ length: garden.garden.length }).map((_val, index) => {
+      {Array.from({ length: Math.min(garden.garden.length, garden.maxQuantity  + 1)}).map((_val, index) => {
+        const scaledIndex = index * 2
+        const xOffset = scaledIndex < garden.width ?  garden.width / 2: scaledIndex -  1.5 * garden.width ;
+        const zOffset = scaledIndex < garden.height ?  scaledIndex - garden.height/ 2:  garden.height - (garden.height / 2) ;
         return (
           <DragControls
             dragLimits={[
@@ -63,7 +62,7 @@ const Plants = () => {
             ]}
           >
             <Planter
-              position={[garden.width, 0.6, 2 * index]}
+              position={[xOffset, 0.6, zOffset]}
               scale={garden.garden[index].size * 0.4}
               color={garden.garden[index].color}
               index={index}

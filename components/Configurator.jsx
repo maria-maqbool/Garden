@@ -21,15 +21,33 @@ const Configurator = () => {
       <div className="">
         <Title />
         <Size />
-        {/* <Quantity /> */}
+        <Quantity />
         <Color />
         <PlanterSize />
       </div>
 
+      <AutoLayout/>
       <Add />
     </div>
   );
 };
+const AutoLayout =  () => {
+  const {maxQuantity, addPlanter, garden} = useStateStore();
+  console.log(maxQuantity)
+  return (
+    <button
+      className="absolute bottom-20 left-1/2 -translate-x-1/2 text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
+      onClick={() => {
+        for (let index = garden.length; index <= maxQuantity; index++) {
+          addPlanter(`planter${index}`, 'green', 1, index)
+        }
+      }}
+    >
+      Auto Layout
+      <Image src={"/icons/add-white.svg"} width={30} height={30} alt="add" />
+    </button>
+  );
+}
 const Add = () => {
   const state = useStateStore();
   return (
@@ -45,14 +63,8 @@ const Add = () => {
   );
 };
 const Quantity = () => {
-  const garden = useStateStore();
+  const {setMaxQuantity} = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
-  const setQuantity = garden.planters[garden.index](
-    (state) => state.setQuantity,
-  );
-  useEffect(() => {
-    setQuantity(selectedOption);
-  }, []);
   const quantities = [2, 4, 6, 8, 10, 12];
 
   return (
@@ -67,7 +79,7 @@ const Quantity = () => {
                 className={`${selectedOption === value ? "bg-brGreen text-white" : "text-gray-700"} rounded-full px-3 py-1 text-sm font-semibold  mr-2`}
                 onClick={() => {
                   setSelectedOption(value);
-                  setQuantity(value);
+                  setMaxQuantity(value)
                 }}
               >
                 {value}
@@ -227,7 +239,7 @@ const Size = () => {
             min="1"
             max="30"
             value={height}
-            step="0.1"
+            step="1"
             onChange={handleHeightChange}
             id="height"
             className="slider"
@@ -253,7 +265,7 @@ const Size = () => {
             min="1"
             max="30"
             value={width}
-            step="0.1"
+            step="1"
             onChange={handleWidthChange}
             id="width"
             className="slider"
