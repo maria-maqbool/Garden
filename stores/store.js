@@ -44,7 +44,7 @@ export const useStateStore = create((set, get) => ({
   width: 20,
   height: 20,
   maxQuantity: 2,
-  terrain: 'sand',
+  terrain: 'leaf',
   setTerrain: (terrain) => set(() => ({ terrain })),
   setMaxQuantity: (quantity) => set(() => ({ maxQuantity: quantity })),
   changeHeight: (height) => set(() => ({ height })),

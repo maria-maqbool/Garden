@@ -123,7 +123,7 @@ const Terrain = () => {
     { title: "mud leaf", value: "leaf2" },
   ];
   return (
-    <Section title={"planter size"}>
+    <Section title={"Terrain"}>
       <div className="flex flex-col gap-2 mt-4 text-gray-500">
         <div className="cursor-pointer">
           {quantities.map((value, index) => {
