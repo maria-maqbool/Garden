@@ -11,7 +11,7 @@ import { Shrub } from "./models/Shrub";
 const Scene = () => {
   const garden = useStateStore();
   return (
-    <div className="flex-grow w-5/5 -z-0">
+    <div className="flex-grow w-4/5 -z-0">
       <Canvas camera={{ position: [0, 10, 45], zoom: 2 }}>
         <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 3}/>
 

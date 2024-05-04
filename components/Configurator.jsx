@@ -2,6 +2,7 @@
 import { useStateStore } from "@/stores/store";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
+import Link from 'next/link'
 
 const Configurator = () => {
   return (
@@ -32,7 +33,7 @@ const Configurator = () => {
   );
 };
 const Overview = () => {
-  return <button className="py-4 px-8 text-lg rounded-full border-2 border-white">See Overview</button>;
+  return <Link href="/overview" className="py-4 px-8 text-lg rounded-full border-2 border-white">See Overview</Link>;
 };
 const PlantName = () => {
   const garden = useStateStore();

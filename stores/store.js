@@ -43,7 +43,7 @@ export const useStateStore = create((set, get) => ({
   setActive: (index) => set(() => ({ activeIndex: index })),
   width: 20,
   height: 20,
-  maxQuantity: 8,
+  maxQuantity: 2,
   terrain: 'sand',
   setTerrain: (terrain) => set(() => ({ terrain })),
   setMaxQuantity: (quantity) => set(() => ({ maxQuantity: quantity })),

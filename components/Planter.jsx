@@ -31,33 +31,14 @@ export function Planter({ index, color, ...props }) {
 export function SinglePlanter({ color, ...props }) {
   const { nodes, materials } = useGLTF("/planter.glb");
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        geometry={nodes.Bergenia_Rotblum_Set065.geometry}
-        material={materials["Sunflower_sf1hcdvf2.003"]}
-        scale={14.407}
-      />
-      <mesh
-        geometry={nodes.Bergenia_Rotblum_Set067.geometry}
-        material={materials["Sunflower_sf1hcdvf2.003"]}
-        scale={14.407}
-      />
-      <mesh
-        geometry={nodes.Bergenia_Rotblum_Set069.geometry}
-        material={materials["Sunflower_sf1hcdvf2.003"]}
-        scale={14.407}
-      />
-      <mesh
-        geometry={nodes.Bergenia_Rotblum_Set070.geometry}
-        material={materials["Sunflower_sf1hcdvf2.003"]}
-        scale={14.407}
-      />
-      <mesh
-        geometry={nodes.Circle032.geometry}
-        material={materials["Dry Soil.004"]}
-        scale={14.407}
-      />
-      <mesh geometry={nodes.Circle033.geometry} scale={14.407}>
+    <group {...props} dispose={null} >
+      <mesh geometry={nodes.Bergenia_Rotblum_Set065.geometry} material={materials['Sunflower_sf1hcdvf2.003']} scale={14.407} />
+      <mesh geometry={nodes.Bergenia_Rotblum_Set067.geometry} material={materials['Sunflower_sf1hcdvf2.003']} scale={14.407} />
+      <mesh geometry={nodes.Bergenia_Rotblum_Set069.geometry} material={materials['Sunflower_sf1hcdvf2.003']} scale={14.407} />
+      <mesh geometry={nodes.Bergenia_Rotblum_Set070.geometry} material={materials['Sunflower_sf1hcdvf2.003']} scale={14.407} />
+      <mesh geometry={nodes.Circle032.geometry} material={materials['Material.002']} scale={14.407} />
+      {/* <mesh geometry={nodes.Circle033.geometry} material={materials['Material.001']} scale={14.407} /> */}
+      <mesh geometry={nodes.Circle033.geometry} scale={14.407} >
         <meshStandardMaterial
           side={THREE.DoubleSide}
           color={color}
