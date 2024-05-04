@@ -1,5 +1,5 @@
 import React from "react";
-import { useGLTF } from "@react-three/drei";
+import { Bounds, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { useStateStore } from "@/stores/store";
 import { Base } from "./Base";
@@ -11,15 +11,17 @@ export function Planter({ index, color, ...props }) {
     <group position={[0, 1.3, 0]} {...props} onClick={ () => setActive(index)} >
       {Array.from({ length: 5 }).map((_val, index) => {
         return (
-          // <SinglePlanter
-          //   color={color}
-          //   position={[0, index * 1.99 + 1, 0]}
-          //   rotation={[0, index % 2 === 0 ? Math.PI / 4 : 0, 0]}
-          // />
-          <mesh scale={2}>
-            <boxGeometry/>
-            <meshStandardMaterial color={color}/>
-          </mesh>
+          <SinglePlanter
+            color={color}
+            position={[0, index * 1.99 + 1, 0]}
+            rotation={[0, index % 2 === 0 ? Math.PI / 4 : 0, 0]}
+          />
+
+          // <mesh scale={2}>
+          //   <boxGeometry/>
+          //   <meshStandardMaterial color={color}/>
+          // </mesh>
+
         );
       })}
       <Base position={[-0.3, 0, 0.2]} />

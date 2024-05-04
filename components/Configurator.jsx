@@ -5,57 +5,74 @@ import React, { useEffect, useRef, useState } from "react";
 
 const Configurator = () => {
   return (
-    <div className="absolute right-20 bottom-20 top-40 z-10 w-1/4 bg-white rounded-3xl">
-      <div className="w-full h-[10%] bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-2xl">
-        Garden Size
-        <div className="flex gap-2">
-          <Image src={"/icons/bin.svg"} width={30} height={30} alt="del" />
-          <Image
-            src={"/icons/expand-white.svg"}
-            width={30}
-            height={30}
-            alt="expand"
-          />
-        </div>
+    <div className="flex overflow-y-scroll absolute right-20 bottom-20 top-40 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[70vh]">
+      <div>
+      <div className="w-full h-20 bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-2xl">
+        <PlantName />
       </div>
-      <div className="">
+
         <Title />
         <Size />
         <Quantity />
         <Color />
         <PlanterSize />
-        <Terrain/>
+        <Terrain />
       </div>
 
-      <AutoLayout/>
-      <Add />
+      <div className="flex flex-col gap-4 w-full mt-12">
+        <div className="flex gap-4 justify-center items-center w-full">
+          <AutoLayout />
+          <Add />
+        </div>
+        <div className=" w-full h-20 bg-brGreen rounded-b-3xl text-white flex items-center justify-center p-4 text-2xl">
+          <Overview />
+        </div>
+      </div>
     </div>
   );
 };
-const AutoLayout =  () => {
-  const {maxQuantity, addPlanter, garden} = useStateStore();
-  console.log(maxQuantity)
+const Overview = () => {
+  return <button className="py-4 px-8 text-lg rounded-full border-2 border-white">See Overview</button>;
+};
+const PlantName = () => {
+  const garden = useStateStore();
+  return (
+    <>
+      <div>{garden.garden[garden.activeIndex].name}</div>
+      <div className="flex gap-2">
+        <button title="delete planter" onClick={() => garden.deletePlanter(garden.garden[garden.activeIndex].name)}>
+          <Image src={"/icons/bin.svg"} width={30} height={30} alt="del" />
+        </button>
+        <Image src={"/icons/expand-white.svg"} width={30} height={30} alt="expand" />
+      </div>
+    </>
+  );
+};
+const AutoLayout = () => {
+  const { maxQuantity, addPlanter, garden } = useStateStore();
+  console.log(maxQuantity);
   return (
     <button
-      className="absolute bottom-20 left-1/2 -translate-x-1/2 text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
+      title="auto layout"
+      className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
       onClick={() => {
         for (let index = garden.length; index <= maxQuantity; index++) {
-          addPlanter(`planter${index}`, 'green', 1, index)
+          addPlanter(`planter${index}`, "green", 1, index);
         }
       }}
     >
-      Auto Layout
-      <Image src={"/icons/add-white.svg"} width={30} height={30} alt="add" />
+      <Image src={"/icons/layout.svg"} width={30} height={30} alt="add" />
     </button>
   );
-}
+};
 const Add = () => {
   const state = useStateStore();
   return (
     <button
-      className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
+      title="add planter"
+      className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
       onClick={() => {
-        state.addPlanter("plant2", "yellow", 1, state.activeIndex + 1);
+        state.addPlanter(`plant ${state.activeIndex + 1}`, "yellow", 1, state.activeIndex + 1);
       }}
     >
       Add Planter
@@ -64,7 +81,7 @@ const Add = () => {
   );
 };
 const Quantity = () => {
-  const {setMaxQuantity} = useStateStore();
+  const { setMaxQuantity } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
   const quantities = [2, 4, 6, 8, 10, 12];
 
@@ -80,7 +97,7 @@ const Quantity = () => {
                 className={`${selectedOption === value ? "bg-brGreen text-white" : "text-gray-700"} rounded-full px-3 py-1 text-sm font-semibold  mr-2`}
                 onClick={() => {
                   setSelectedOption(value);
-                  setMaxQuantity(value)
+                  setMaxQuantity(value);
                 }}
               >
                 {value}
@@ -98,11 +115,11 @@ const Terrain = () => {
   const [selectedOption, setSelectedOption] = useState(2);
 
   const quantities = [
-    { title: "leaf", value: 'leaf' },
-    { title: "mud", value: 'mud' },
-    { title: "forest", value: 'forest' },
-    { title: "tough tile", value: 'brick' },
-    { title: "mud leaf", value: 'leaf2' },
+    { title: "leaf", value: "leaf" },
+    { title: "mud", value: "mud" },
+    { title: "forest", value: "forest" },
+    { title: "tough tile", value: "brick" },
+    { title: "mud leaf", value: "leaf2" },
   ];
   return (
     <Section title={"planter size"}>
@@ -126,7 +143,7 @@ const Terrain = () => {
       </div>
     </Section>
   );
-}
+};
 const PlanterSize = () => {
   const { setPlantSize } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
@@ -134,7 +151,7 @@ const PlanterSize = () => {
   const quantities = [
     { title: "Small (22cm width)", scale: 0.5 },
     { title: "Medium (34cm width)", scale: 0.8 },
-    { title: "Large (45cm width)", scale: 1.0 }
+    { title: "Large (45cm width)", scale: 1.0 },
   ];
   return (
     <Section title={"planter size"}>
@@ -206,13 +223,7 @@ const Color = () => {
               setSelected(null);
             }}
           />
-          <Image
-            src={"/icons/add.svg"}
-            width={30}
-            height={30}
-            alt="add"
-            className="w-12 h-12 rounded-full cursor-pointer"
-          />
+          <Image src={"/icons/add.svg"} width={30} height={30} alt="add" className="w-12 h-12 rounded-full cursor-pointer" />
 
           <p className="text-gray-500 capitalize">other</p>
         </div>
@@ -222,13 +233,15 @@ const Color = () => {
 };
 
 const Title = () => {
-  const [title, setTitle] = useState("planter 1");
+  const { garden, activeIndex } = useStateStore();
+  const [title, setTitle] = useState(garden[activeIndex].name);
+  useEffect(() => {
+    setTitle(garden[activeIndex].name);
+  }, [garden[activeIndex].name]);
   // const [shouldChange, setShouldChange] = useState(false);
   const inputEl = useRef(null);
   return (
-    <div
-      className={`w-full min-h-[10%] flex justify-between items-center border-b-2 border-y-gray-300 py-4 p-4`}
-    >
+    <div className={`w-full min-h-[10%] flex justify-between items-center border-b-2 border-y-gray-300 py-4 p-4`}>
       <div className="flex gap-8">
         <div className="text-xl text-gray-600 capitalize">Title</div>
         <input
@@ -240,14 +253,7 @@ const Title = () => {
           onChange={(value) => setTitle(value.target.value)}
         />
       </div>
-      <Image
-        src={"/icons/edit.svg"}
-        width={30}
-        height={30}
-        alt="edit"
-        className="cursor-pointer"
-        onClick={() => inputEl.current.focus()}
-      />
+      <Image src={"/icons/edit.svg"} width={30} height={30} alt="edit" className="cursor-pointer" onClick={() => inputEl.current.focus()} />
     </div>
   );
 };
@@ -269,52 +275,20 @@ const Size = () => {
       <div className="flex gap-2 my-2 text-gray-500">
         <div className="flex flex-col gap-4">
           <p className="">Height</p>
-          <input
-            type="range"
-            min="1"
-            max="30"
-            value={height}
-            step="1"
-            onChange={handleHeightChange}
-            id="height"
-            className="slider"
-          />
+          <input type="range" min="1" max="30" value={height} step="1" onChange={handleHeightChange} id="height" className="slider" />
           <div className="flex">
             <div className="w-1/4 border-b-2 border-gray-300">
-              <input
-                type="number"
-                value={height}
-                min="1"
-                max="30"
-                onChange={handleHeightChange}
-                className="bg-gray-100"
-              />
+              <input type="number" value={height} min="1" max="30" onChange={handleHeightChange} className="bg-gray-100" />
             </div>
             <p className="text-gray-400">Feet</p>
           </div>
         </div>
         <div className="flex flex-col gap-4">
           <p className="">Width</p>
-          <input
-            type="range"
-            min="1"
-            max="30"
-            value={width}
-            step="1"
-            onChange={handleWidthChange}
-            id="width"
-            className="slider"
-          />
+          <input type="range" min="1" max="30" value={width} step="1" onChange={handleWidthChange} id="width" className="slider" />
           <div className="flex">
             <div className="w-1/4 border-b-2 border-gray-300">
-              <input
-                type="number"
-                value={width}
-                min="1"
-                max="30"
-                onChange={handleWidthChange}
-                className="bg-gray-100"
-              />
+              <input type="number" value={width} min="1" max="30" onChange={handleWidthChange} className="bg-gray-100" />
             </div>
             <p className="text-gray-400">Feet</p>
           </div>
@@ -327,27 +301,12 @@ const Size = () => {
 const Section = ({ children, title }) => {
   const [open, setOpen] = useState(true);
   return (
-    <div
-      className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-4 ${open ? "bg-white" : "bg-gray-100"} transition-colors p-4`}
-    >
-      <button
-        className="flex justify-between items-center"
-        onClick={() => setOpen((state) => !state)}
-      >
+    <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-4 ${open ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
+      <button className="flex justify-between items-center" onClick={() => setOpen((state) => !state)}>
         <div className="text-xl text-gray-600 capitalize">{title}</div>
-        <Image
-          src={"/icons/expand.svg"}
-          width={30}
-          height={30}
-          alt="expand"
-          className={` transition-transform ${open ? "-rotate-90" : ""}`}
-        />
+        <Image src={"/icons/expand.svg"} width={30} height={30} alt="expand" className={` transition-transform ${open ? "-rotate-90" : ""}`} />
       </button>
-      <div
-        className={`${open ? "max-h-0" : "max-h-50"} transition-all overflow-hidden`}
-      >
-        {children}
-      </div>
+      <div className={`${open ? "max-h-0" : "max-h-50"} transition-all overflow-hidden`}>{children}</div>
     </div>
   );
 };

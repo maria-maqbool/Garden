@@ -18,6 +18,7 @@ const Scene = () => {
         <Plants />
         {/* </DragControls> */}
         <Ground />
+        {/* <Sky /> */}
         <Environment preset="forest" />
       </Canvas>
     </div>

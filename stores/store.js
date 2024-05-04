@@ -35,11 +35,15 @@ export const useStateStore = create((set, get) => ({
         garden: updatedPlants,
       };
     }),
+ deletePlanter: (name) =>
+    set((state) => ({
+      garden: state.garden.filter((item, _i) => item.name !== name),
+    })),
   activeIndex: 0,
   setActive: (index) => set(() => ({ activeIndex: index })),
   width: 20,
   height: 20,
-  maxQuantity: 2,
+  maxQuantity: 8,
   terrain: 'sand',
   setTerrain: (terrain) => set(() => ({ terrain })),
   setMaxQuantity: (quantity) => set(() => ({ maxQuantity: quantity })),
