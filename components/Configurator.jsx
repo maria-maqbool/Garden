@@ -24,6 +24,7 @@ const Configurator = () => {
         <Quantity />
         <Color />
         <PlanterSize />
+        <Terrain/>
       </div>
 
       <AutoLayout/>
@@ -92,6 +93,40 @@ const Quantity = () => {
   );
 };
 
+const Terrain = () => {
+  const { setTerrain } = useStateStore();
+  const [selectedOption, setSelectedOption] = useState(2);
+
+  const quantities = [
+    { title: "leaf", value: 'leaf' },
+    { title: "mud", value: 'mud' },
+    { title: "forest", value: 'forest' },
+    { title: "tough tile", value: 'brick' },
+    { title: "mud leaf", value: 'leaf2' },
+  ];
+  return (
+    <Section title={"planter size"}>
+      <div className="flex flex-col gap-2 mt-4 text-gray-500">
+        <div className="cursor-pointer">
+          {quantities.map((value, index) => {
+            return (
+              <div
+                key={index}
+                className={`${selectedOption === value.title ? "text-brGreen" : "text-gray-700"} rounded-full  py-1  `}
+                onClick={() => {
+                  setSelectedOption(value.title);
+                  setTerrain(value.value);
+                }}
+              >
+                {value.title}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </Section>
+  );
+}
 const PlanterSize = () => {
   const { setPlantSize } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
