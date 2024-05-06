@@ -1,14 +1,15 @@
 import { create } from "zustand";
 
 const initialState = [{ name: "plant1", color: "green" }];
+
 export const useStateStore = create((set, get) => ({
   garden: initialState,
-  addPlanter: (name, color, size, index) =>
+  addPlanter: (name, color, size, index, trolley) =>
     set((state) => {
       if (state.garden.length > state.maxQuantity)
         return { garden: state.garden };
       return {
-        garden: [...state.garden, { name, color, size }],
+        garden: [...state.garden, { name, color, size, trolley }],
         activeIndex: index,
       };
     }),
@@ -18,6 +19,18 @@ export const useStateStore = create((set, get) => ({
       updatedPlants[state.activeIndex] = {
         ...updatedPlants[state.activeIndex],
         color,
+      };
+      return {
+        garden: updatedPlants,
+      };
+    }),
+
+  setTrolley: (trolley) =>
+    set((state) => {
+      const updatedPlants = [...state.garden];
+      updatedPlants[state.activeIndex] = {
+        ...updatedPlants[state.activeIndex],
+        trolley,
       };
       return {
         garden: updatedPlants,

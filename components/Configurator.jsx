@@ -17,7 +17,7 @@ const Configurator = () => {
         <Quantity />
         <Color />
         <PlanterSize />
-        <Terrain />
+        <Trolley />
       </div>
 
       <div className="flex flex-col gap-4 w-full mt-12">
@@ -51,14 +51,13 @@ const PlantName = () => {
 };
 const AutoLayout = () => {
   const { maxQuantity, addPlanter, garden } = useStateStore();
-  console.log(maxQuantity);
   return (
     <button
       title="auto layout"
       className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
       onClick={() => {
         for (let index = garden.length; index <= maxQuantity; index++) {
-          addPlanter(`planter${index}`, "green", 1, index);
+          addPlanter(`planter${index}`, "green", 1, index, true);
         }
       }}
     >
@@ -73,7 +72,7 @@ const Add = () => {
       title="add planter"
       className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
       onClick={() => {
-        state.addPlanter(`plant ${state.activeIndex + 1}`, "yellow", 1, state.activeIndex + 1);
+        state.addPlanter(`plant ${state.activeIndex + 1}`, "yellow", 1, state.activeIndex + 1, true);
       }}
     >
       Add Planter
@@ -111,19 +110,16 @@ const Quantity = () => {
   );
 };
 
-const Terrain = () => {
-  const { setTerrain } = useStateStore();
-  const [selectedOption, setSelectedOption] = useState(2);
+const Trolley = () => {
+  const { setTrolley } = useStateStore();
+  const [selectedOption, setSelectedOption] = useState("with trolley");
 
   const quantities = [
-    { title: "leaf", value: "leaf" },
-    { title: "mud", value: "mud" },
-    { title: "forest", value: "forest" },
-    { title: "tough tile", value: "brick" },
-    { title: "mud leaf", value: "leaf2" },
+    { title: "with trolley", value: true },
+    { title: "without trolley", value: false },
   ];
   return (
-    <Section title={"Terrain"}>
+    <Section title={"Inclusion"}>
       <div className="flex flex-col gap-2 mt-4 text-gray-500">
         <div className="cursor-pointer">
           {quantities.map((value, index) => {
@@ -133,7 +129,7 @@ const Terrain = () => {
                 className={`${selectedOption === value.title ? "text-brGreen" : "text-gray-700"} rounded-full  py-1  `}
                 onClick={() => {
                   setSelectedOption(value.title);
-                  setTerrain(value.value);
+                  setTrolley(value.value);
                 }}
               >
                 {value.title}

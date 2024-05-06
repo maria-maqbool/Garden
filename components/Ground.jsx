@@ -1,12 +1,10 @@
 import { useStateStore } from "@/stores/store";
-import vertexShader from "@/components/shaders/vertexShader.glsl";
 import vertexPars from "@/components/shaders/vertPars.glsl";
 import vertexMain from "@/components/shaders/vertMain.glsl";
 
 import fragmentPars from "@/components/shaders/fragPars.glsl";
 import fragmentMain from "@/components/shaders/fragMain.glsl";
 
-import fragmentShader from "@/components/shaders/fragmentShader.glsl";
 import { RoundedBox } from "@react-three/drei";
 import { useRef } from "react";
 
@@ -24,7 +22,7 @@ const Ground = () => {
 
       <RoundedBox position={[0, -depth / 2, 0]} args={[width * 1.1,height * 1.1, depth]} radius={2} bevelSegments={0} rotation={[Math.PI / 2,0,0]}>
         {/* <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} transparent /> */}
-        <meshPhysicalMaterial
+        <meshStandardMaterial
           transparent
           ref={materialRef}
           onBeforeCompile={(shader) => {
