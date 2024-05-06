@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const Configurator = () => {
   return (
-    <div className="flex overflow-y-scroll absolute right-20 bottom-20 top-40 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[70vh]">
+    <div className="flex overflow-y-scroll absolute right-20 bottom-10 top-30 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[85vh]">
       <div>
       <div className="w-full h-20 bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-2xl">
         <PlantName />
@@ -81,15 +81,18 @@ const Add = () => {
   );
 };
 const Quantity = () => {
-  const { setMaxQuantity } = useStateStore();
+  const { setMaxQuantity, width, height } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
-  const quantities = [2, 4, 6, 8, 10, 12];
+  const quantities = []; 
+  for (let index = 2; index <= (width * height) / 20; index+=2) {
+    quantities.push(index);
+  }
 
   return (
     <Section title={"number of Quantity of planter"}>
       <div className="flex flex-col gap-2 mt-4 text-gray-500">
         Choose an option
-        <div className="flex cursor-pointer">
+        <div className="grid grid-cols-6 justify-items-center cursor-pointer">
           {quantities.map((value, index) => {
             return (
               <div
@@ -300,7 +303,7 @@ const Section = ({ children, title }) => {
   return (
     <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-4 ${open ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
       <button className="flex justify-between items-center" onClick={() => setOpen((state) => !state)}>
-        <div className="text-xl text-gray-600 capitalize">{title}</div>
+        <div className="text-lg text-gray-600 capitalize">{title}</div>
         <Image src={"/icons/expand.svg"} width={30} height={30} alt="expand" className={` transition-transform ${open ? "-rotate-90" : ""}`} />
       </button>
       <div className={`${open ? "max-h-0" : "max-h-50"} transition-all overflow-hidden`}>{children}</div>
