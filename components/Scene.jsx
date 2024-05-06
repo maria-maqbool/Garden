@@ -25,7 +25,7 @@ const Plants = () => {
     <>
       {garden.garden.map((planter, index) => {
         const scaledIndex = index * 2;
-        const xOffset = scaledIndex < garden.width ? garden.width  : scaledIndex - 1.5 * garden.width;
+        const xOffset = scaledIndex < garden.width ? -garden.width  : scaledIndex - 1.5 * garden.width;
         const zOffset = scaledIndex < garden.height ? scaledIndex - garden.height / 2 : garden.height - garden.height / 2;
         return (
           <DragControls
