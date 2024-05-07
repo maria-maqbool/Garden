@@ -1,14 +1,38 @@
-import React from 'react'
+// components/LoadingScreen.js
+import React from "react";
 
-const Loading = () => {
+const LoadingScreen = () => {
   return (
-    <div className="flex fixed top-0 left-0 z-50 justify-center items-center w-full h-full bg-brGreen">
-      <div className="flex flex-col items-center">
-        <div className="w-16 h-16 rounded-full border-4 border-green-200 border-opacity-20 animate-spin"></div>
-        <h2 className="mt-4 text-lg font-semibold text-gray-700">Loading...</h2>
+    <div className="w-screen h-screen bg-gray-300 bg-gradient-to-tl from-[#71a32f] via-green-200 to-transparent "><div className="loader absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="box box0">
+        <div></div>
       </div>
-    </div>
+      <div className="box box1">
+        <div></div>
+      </div>
+      <div className="box box2">
+        <div></div>
+      </div>
+      <div className="box box3">
+        <div></div>
+      </div>
+      <div className="box box4">
+        <div></div>
+      </div>
+      <div className="box box5">
+        <div></div>
+      </div>
+      <div className="box box6">
+        <div></div>
+      </div>
+      <div className="box box7">
+        <div></div>
+      </div>
+      <div className="ground">
+        <div></div>
+      </div>
+    </div></div>
   );
-}
+};
 
-export default Loading
+export default LoadingScreen;

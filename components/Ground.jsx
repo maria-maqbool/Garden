@@ -9,28 +9,26 @@ import { RoundedBox } from "@react-three/drei";
 import { useRef } from "react";
 
 const Ground = () => {
-  const { width, height } = useStateStore();
+  const { width, height, maxQuantity } = useStateStore();
   const depth = 30;
   const materialRef = useRef(null);
+
   return (
     <group>
-      <RoundedBox args={[width, height, 3]} radius={0.8}  bevelSegments={0} position={[0, -1, 0]} rotation={[Math.PI / 2,0,0]}>
-        <meshStandardMaterial color={'#B5EA6A'} />
+      <RoundedBox args={[width, height, 3]} radius={0.8} bevelSegments={0} position={[0, -1, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <meshStandardMaterial color={"#B5EA6A"} />
       </RoundedBox>
 
-      <RoundedBox args={[width /3, height, 3]} radius={0.8}  bevelSegments={0} position={[-width, -1, 0]} rotation={[Math.PI / 2,0,0]}>
-        <meshStandardMaterial color={'gray'} />
+      <RoundedBox args={[8, height, 3]} radius={0.8} bevelSegments={0} position={[-width - 2, -1, 0]} rotation={[Math.PI / 2, 0, 0]}>
+        <meshStandardMaterial color={"gray"} />
       </RoundedBox>
-      <spotLight color="yellow" position={[0, 10, 0]} intensity={100}/>
+      <spotLight color="yellow" position={[0, 10, 0]} intensity={100} />
 
-
-      <RoundedBox position={[0, -depth / 2, 0]} args={[width * 1.1,height * 1.1, depth]} radius={2} bevelSegments={0} rotation={[Math.PI / 2,0,0]}>
-        {/* <shaderMaterial vertexShader={vertexShader} fragmentShader={fragmentShader} transparent /> */}
+      <RoundedBox position={[0, -depth / 2, 0]} args={[width * 1.1, height * 1.1, depth]} radius={2} bevelSegments={0} rotation={[Math.PI / 2, 0, 0]}>
         <meshStandardMaterial
           transparent
           ref={materialRef}
           onBeforeCompile={(shader) => {
-            // setting up the uniforms
             materialRef.current.userData.shader = shader;
 
             // injecting vertex and fragment shaders

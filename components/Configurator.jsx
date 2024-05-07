@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 const Configurator = () => {
   return (
-    <div className="flex overflow-y-scroll absolute right-20 bottom-10 top-30 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[85vh]">
+    <div className="no-scrollbar flex overflow-y-scroll absolute right-20 bottom-10 top-30 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[85vh]">
       <div>
       <div className="w-full h-20 bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-2xl">
         <PlantName />
@@ -36,16 +36,17 @@ const Overview = () => {
   return <Link href="/overview" className="py-4 px-8 text-lg rounded-full border-2 border-white">See Overview</Link>;
 };
 const PlantName = () => {
-  const garden = useStateStore();
+  // const garden = useStateStore();
   return (
     <>
-      <div>{garden.garden[garden.activeIndex].name}</div>
-      <div className="flex gap-2">
-        <button title="delete planter" onClick={() => garden.deletePlanter(garden.garden[garden.activeIndex].name)}>
-          <Image src={"/icons/bin.svg"} width={30} height={30} alt="del" />
-        </button>
-        <Image src={"/icons/expand-white.svg"} width={30} height={30} alt="expand" />
-      </div>
+      {/* <div>{garden.garden[garden.activeIndex].name}</div> */}
+      <div>Garden</div>
+      {/* <div className="flex gap-2"> */}
+      {/*   <button title="delete planter" onClick={() => garden.deletePlanter(garden.garden[garden.activeIndex].name)}> */}
+      {/*     <Image src={"/icons/bin.svg"} width={30} height={30} alt="del" /> */}
+      {/*   </button> */}
+      {/*   <Image src={"/icons/expand-white.svg"} width={30} height={30} alt="expand" /> */}
+      {/* </div> */}
     </>
   );
 };

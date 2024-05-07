@@ -3,10 +3,8 @@ import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { useStateStore } from "@/stores/store";
 import { Base } from "./Base";
-import { useThree } from "@react-three/fiber";
 
 export function Planter({ index, color, trolley, ...props }) {
-  const { scene } = useThree();
   const { nodes, materials } = useGLTF("/planter.glb");
   const base = new THREE.InstancedMesh(nodes.Circle033.geometry, new THREE.MeshStandardMaterial({ color: color, side: THREE.DoubleSide }), 5);
   const leafs = new THREE.InstancedMesh(nodes.Plane038.geometry, materials["Material.003"], 5);
@@ -50,25 +48,6 @@ export function Planter({ index, color, trolley, ...props }) {
     </group>
   );
 }
-// export function Planter({ index, color, trolley, ...props }) {
-//   const { setActive } = useStateStore();
-//   return (
-//     <group position={[0, 1.3, 0]} {...props} onClick={() => setActive(index)}>
-//       {Array.from({ length: 5 }).map((_val, index) => {
-//         return (
-//           <SinglePlanter color={color} position={[0, index * 1.99 + 1, 0]} rotation={[0, index % 2 === 0 ? Math.PI / 4 : 0, 0]} />
-//           //
-//           // <mesh scale={2} position={[0, index * 1.99 + 1, 0]} rotation={[0, index % 2 === 0 ? Math.PI / 4 : 0, 0]}>
-//           //   <boxGeometry />
-//           //
-//           //   <meshStandardMaterial color={color} />
-//           // </mesh>
-//         );
-//       })}
-//       {trolley && <Base position={[-0.3, 0, 0.2]} />}
-//     </group>
-//   );
-// }
 
 export function SinglePlanter({ color, ...props }) {
   const { nodes, materials } = useGLTF("/planter.glb");
