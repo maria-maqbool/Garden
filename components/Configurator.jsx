@@ -150,8 +150,8 @@ const PlanterSize = () => {
   const [selectedOption, setSelectedOption] = useState(2);
 
   const quantities = [
-    { title: "Small (22cm width)", scale: 0.5 },
-    { title: "Medium (34cm width)", scale: 0.8 },
+    // { title: "Small (22cm width)", scale: 0.5 },
+    { title: "Medium (33cm width)", scale: 0.8 },
     { title: "Large (45cm width)", scale: 1.0 },
   ];
   return (
@@ -183,7 +183,7 @@ const Color = () => {
   const [selected, setSelected] = useState("black");
   const colors = [
     { name: "black", hex: "#000" },
-    { name: "Terracotta", hex: "#71A32F" },
+    { name: "Terracotta", hex: "#D35832" },
     { name: "Stone", hex: "#A8A5A1" },
   ];
   const colorEl = useRef(null);
