@@ -27,20 +27,16 @@ const Plants = () => {
     <>
       {garden.garden.map((planter, index) => {
         const planterIndex = index * 2;
-        if (planterIndex - 2 >= garden.height * row) {
-          row = row + 1;
+        if (planterIndex  > (garden.height * row) -row ) {
+          row += 1;
         }
-        const xOffset = -garden.width - row * 4 + garden.width / 4;
+        const xOffset = (-garden.width - (row * 4)) + garden.width / 4;
         let yOffset = planterIndex - row * garden.height;
         yOffset += garden.height / 2;
 
         return (
           <DragControls
-          dragLimits={[
-            [-Infinity, Infinity],
-            [0, 0],
-            [-Infinity, Infinity],
-          ]}
+            axisLock={ "y" }
           >
             <Planter position={[xOffset, 0.6, yOffset]} scale={planter.size * 0.4} color={planter.color} index={index} trolley={planter.trolley} />
           </DragControls>
