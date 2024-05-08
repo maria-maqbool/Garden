@@ -281,20 +281,20 @@ const Size = () => {
       <div className="flex gap-2 my-2 text-gray-500">
         <div className="flex flex-col gap-4">
           <p className="">Height</p>
-          <input type="range" min="1" max="30" value={height} step="1" onChange={handleHeightChange} id="height" className="slider" />
+          <input type="range" min="5" max="30" value={height} step="1" onChange={handleHeightChange} id="height" className="slider" />
           <div className="flex">
             <div className="w-1/4 border-b-2 border-gray-300">
-              <input type="number" value={height} min="1" max="30" onChange={handleHeightChange} className="bg-gray-100" />
+              <input type="number" value={height} min="5" max="30" onChange={handleHeightChange} className="bg-gray-100" />
             </div>
             <p className="text-gray-400">Feet</p>
           </div>
         </div>
         <div className="flex flex-col gap-4">
           <p className="">Width</p>
-          <input type="range" min="1" max="30" value={width} step="1" onChange={handleWidthChange} id="width" className="slider" />
+          <input type="range" min="5" max="30" value={width} step="1" onChange={handleWidthChange} id="width" className="slider" />
           <div className="flex">
             <div className="w-1/4 border-b-2 border-gray-300">
-              <input type="number" value={width} min="1" max="30" onChange={handleWidthChange} className="bg-gray-100" />
+              <input type="number" value={width} min="5" max="30" onChange={handleWidthChange} className="bg-gray-100" />
             </div>
             <p className="text-gray-400">Feet</p>
           </div>

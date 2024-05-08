@@ -8,7 +8,7 @@ import { Planter } from "./Planter";
 
 const Scene = () => (
   <div className="flex-grow w-4/5 -z-0">
-    <Canvas camera={{ position: [100, 10, 0], zoom: 5.5 }}>
+    <Canvas camera={{ position: [100, 10, 0], zoom: 7 }}>
       {/* <Stats /> */}
       <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 3} />
 
@@ -32,7 +32,7 @@ const Plants = () => {
           row += 1;
         }
         console.log(garden.maxQuantity);
-        const xOffset = -garden.width - row * 4 + garden.width / 4;
+        const xOffset = - row * 4 + garden.width / 2 ;
         let yOffset = planterIndex - row * garden.height;
         yOffset += garden.height / 2;
 
