@@ -8,7 +8,7 @@ import { Planter } from "./Planter";
 
 const Scene = () => (
   <div className="flex-grow w-4/5 -z-0">
-    <Canvas camera={{ position: [100, 10, 0], zoom: 5.5 }} >
+    <Canvas camera={{ position: [100, 10, 0], zoom: 5.5 }}>
       {/* <Stats /> */}
       <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 3} />
 
@@ -26,20 +26,20 @@ const Plants = () => {
   return (
     <>
       {garden.garden.map((planter, index) => {
-        const planterIndex = index * 2;
-        if (planterIndex  > (garden.height * row) -row ) {
+        if(index > garden.maxQuantity) return null; 
+        const planterIndex = index * 3;
+        if (planterIndex >= garden.height * row) {
           row += 1;
         }
-        const xOffset = (-garden.width - (row * 4)) + garden.width / 4;
+        console.log(garden.maxQuantity);
+        const xOffset = -garden.width - row * 4 + garden.width / 4;
         let yOffset = planterIndex - row * garden.height;
         yOffset += garden.height / 2;
 
         return (
-          <DragControls
-            axisLock={ "y" }
-          >
+          <>{index < garden.maxQuantity && <DragControls axisLock={"y"}>
             <Planter position={[xOffset, 0.6, yOffset]} scale={planter.size * 0.4} color={planter.color} index={index} trolley={planter.trolley} />
-          </DragControls>
+          </DragControls>}</>
         );
       })}
     </>

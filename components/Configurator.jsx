@@ -82,7 +82,7 @@ const Add = () => {
   );
 };
 const Quantity = () => {
-  const { setMaxQuantity, width, height } = useStateStore();
+  const { setQuantity, width, height } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
   const quantities = []; 
   for (let index = 2; index <= (width * height) / 20; index+=2) {
@@ -101,7 +101,7 @@ const Quantity = () => {
                 className={`${selectedOption === value ? "bg-brGreen text-white" : "text-gray-700"} rounded-full px-3 py-1 text-sm font-semibold  mr-2`}
                 onClick={() => {
                   setSelectedOption(value);
-                  setMaxQuantity(value);
+                  setQuantity(value);
                 }}
               >
                 {value}
@@ -261,15 +261,18 @@ const Title = () => {
 const Size = () => {
   const setGardenWidth = useStateStore((state) => state.changeWidth);
   const setGardenHeight = useStateStore((state) => state.changeHeight);
+  const setMaxQuantity  = useStateStore((state) => state.setMaxQuantity); 
   const [width, setWidth] = useState(20);
+  const [height, setHeight] = useState(20);
   const handleWidthChange = (value) => {
     setWidth(value.target.value);
     setGardenWidth(width);
+    setMaxQuantity((width * height) /20)
   };
-  const [height, setHeight] = useState(20);
   const handleHeightChange = (value) => {
     setHeight(value.target.value);
     setGardenHeight(height);
+    setMaxQuantity((width * height) /20)
   };
   return (
     <Section title={"garden size"}>
