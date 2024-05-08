@@ -2,6 +2,11 @@ import { create } from "zustand";
 
 const initialState = [{ name: "plant1", color: "green" }];
 
+
+export const useTabStore = create((set, get) => ({
+  activeTab: '',
+  setActiveTab: (activeTab) => set(() => ({ activeTab })),
+}));
 export const useStateStore = create((set, get) => ({
   garden: initialState,
   addPlanter: (name, color, size, index, trolley) =>

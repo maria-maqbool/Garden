@@ -1,5 +1,5 @@
 "use client";
-import { useStateStore } from "@/stores/store";
+import { useStateStore, useTabStore } from "@/stores/store";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import Link from 'next/link'
@@ -119,8 +119,8 @@ const Trolley = () => {
   const [selectedOption, setSelectedOption] = useState("with trolley");
 
   const quantities = [
-    { title: "with trolley", value: true },
-    { title: "without trolley", value: false },
+    { title: "With trolley", value: true },
+    { title: "Without trolley", value: false },
   ];
   return (
     <Section title={"Inclusion"}>
@@ -300,14 +300,18 @@ const Size = () => {
 };
 
 const Section = ({ children, title }) => {
-  const [open, setOpen] = useState(true);
+  const {activeTab, setActiveTab} = useTabStore();
+  const [closed, setClosed] = useState(activeTab !== title);
+  useEffect(() => {
+      setClosed(activeTab !== title)
+  }, [activeTab])
   return (
-    <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-4 ${open ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
-      <button className="flex justify-between items-center" onClick={() => setOpen((state) => !state)}>
+    <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-4 ${closed ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
+      <button className="flex justify-between items-center" onClick={() => {setClosed((state) => !state); setActiveTab(title)}}>
         <div className="text-lg text-gray-600 capitalize">{title}</div>
-        <Image src={"/icons/expand.svg"} width={30} height={30} alt="expand" className={` transition-transform ${open ? "-rotate-90" : ""}`} />
+        <Image src={"/icons/expand.svg"} width={30} height={30} alt="expand" className={` transition-transform ${closed ? "-rotate-90" : ""}`} />
       </button>
-      <div className={`${open ? "max-h-0" : "max-h-50"} transition-all overflow-hidden`}>{children}</div>
+      <div className={`${closed ? "max-h-0" : "max-h-50"} transition-all overflow-hidden`}>{children}</div>
     </div>
   );
 };
