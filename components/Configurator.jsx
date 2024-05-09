@@ -83,7 +83,7 @@ const Add = () => {
 };
 const Quantity = () => {
   const { setQuantity, setMaxQuantity, width, height } = useStateStore();
-  const [selectedOption, setSelectedOption] = useState(2);
+  const [selectedOption, setSelectedOption] = useState(0);
   const quantities = []; 
   for (let index = 2; index <= (width * height) / 20; index+=2) {
     quantities.push(index);
