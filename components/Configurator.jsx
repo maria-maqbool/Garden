@@ -82,7 +82,7 @@ const Add = () => {
   );
 };
 const Quantity = () => {
-  const { setQuantity, width, height } = useStateStore();
+  const { setQuantity, setMaxQuantity, width, height } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(2);
   const quantities = []; 
   for (let index = 2; index <= (width * height) / 20; index+=2) {
@@ -101,7 +101,8 @@ const Quantity = () => {
                 className={`${selectedOption === value ? "bg-brGreen text-white" : "text-gray-700"} rounded-full px-3 py-1 text-sm font-semibold  mr-2`}
                 onClick={() => {
                   setSelectedOption(value);
-                  setQuantity(value);
+                  // setQuantity(value);
+                  setMaxQuantity(value + 1);
                 }}
               >
                 {value}
