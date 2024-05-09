@@ -101,7 +101,7 @@ const Quantity = () => {
                 className={`${selectedOption === value ? "bg-brGreen text-white" : "text-gray-700"} rounded-full px-3 py-1 text-sm font-semibold  mr-2`}
                 onClick={() => {
                   setSelectedOption(value);
-                  // setQuantity(value);
+                  setQuantity(value);
                   setMaxQuantity(value + 1);
                 }}
               >
@@ -266,7 +266,9 @@ const Size = () => {
   const [width, setWidth] = useState(20);
   const [height, setHeight] = useState(20);
 
-  setMaxQuantity(3)
+  useEffect(() => {
+    setMaxQuantity((width * height) /20)
+  }, [])
   const handleWidthChange = (value) => {
     setWidth(value.target.value);
     setGardenWidth(width);
