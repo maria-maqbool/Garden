@@ -58,7 +58,7 @@ const AutoLayout = () => {
       className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
       onClick={() => {
         for (let index = garden.length; index <= maxQuantity; index++) {
-          addPlanter(`planter${index}`, "green", 1, index, true);
+          addPlanter(`planter${index}`, "#D35832", 1, index, true);
         }
       }}
     >
@@ -73,7 +73,7 @@ const Add = () => {
       title="add planter"
       className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
       onClick={() => {
-        state.addPlanter(`plant ${state.activeIndex + 1}`, "yellow", 1, state.activeIndex + 1, true);
+        state.addPlanter(`plant ${state.activeIndex + 1}`, "#D35832", 1, state.activeIndex + 1, true);
       }}
     >
       Add Planter
