@@ -266,7 +266,7 @@ const Size = () => {
   const [width, setWidth] = useState(20);
   const [height, setHeight] = useState(20);
 
-  setMaxQuantity((width * height) /20)
+  setMaxQuantity(3)
   const handleWidthChange = (value) => {
     setWidth(value.target.value);
     setGardenWidth(width);
