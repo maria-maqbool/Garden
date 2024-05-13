@@ -6,11 +6,11 @@ import Link from 'next/link'
 
 const Configurator = () => {
   return (
-    <div className="no-scrollbar flex overflow-y-scroll absolute right-20 bottom-10 top-30 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[85vh]">
+    <div className="no-scrollbar flex overflow-y-scroll absolute right-20 bottom-10 top-100 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[85vh]">
       <div>
-      <div className="w-full h-20 bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-2xl">
-        <PlantName />
-      </div>
+        <div className="w-full h-20 bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-lg">
+          <PlantName />
+        </div>
 
         <Title />
         <Size />
@@ -21,11 +21,11 @@ const Configurator = () => {
       </div>
 
       <div className="flex flex-col gap-4 w-full mt-12">
-        <div className="flex gap-4 justify-center items-center w-full">
+        {/* <div className="flex gap-4 justify-center items-center w-full">
           <AutoLayout />
           <Add />
-        </div>
-        <div className=" w-full h-20 bg-brGreen rounded-b-3xl text-white flex items-center justify-center p-4 text-2xl">
+        </div> */}
+        <div className=" w-full h-20 bg-brGreen rounded-b-3xl text-white flex items-center justify-center p-2 text-base">
           <Overview />
         </div>
       </div>
@@ -33,8 +33,9 @@ const Configurator = () => {
   );
 };
 const Overview = () => {
-  return <Link href="/overview" className="py-4 px-8 text-lg rounded-full border-2 border-white">See Overview</Link>;
+  return <Link href="/overview" className="py-2 px-4 text-sm rounded-full border-2 border-white">See Overview</Link>;
 };
+
 const PlantName = () => {
   // const garden = useStateStore();
   return (
@@ -50,42 +51,45 @@ const PlantName = () => {
     </>
   );
 };
-const AutoLayout = () => {
-  const { maxQuantity, addPlanter, garden } = useStateStore();
-  return (
-    <button
-      title="auto layout"
-      className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
-      onClick={() => {
-        for (let index = garden.length; index <= maxQuantity; index++) {
-          addPlanter(`planter${index}`, "#D35832", 1, index, true);
-        }
-      }}
-    >
-      <Image src={"/icons/layout.svg"} width={30} height={30} alt="add" />
-    </button>
-  );
-};
-const Add = () => {
-  const state = useStateStore();
-  return (
-    <button
-      title="add planter"
-      className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
-      onClick={() => {
-        state.addPlanter(`plant ${state.activeIndex + 1}`, "#D35832", 1, state.activeIndex + 1, true);
-      }}
-    >
-      Add Planter
-      <Image src={"/icons/add-white.svg"} width={30} height={30} alt="add" />
-    </button>
-  );
-};
+
+// const AutoLayout = () => {
+//   const { maxQuantity, addPlanter, garden } = useStateStore();
+//   return (
+//     <button
+//       title="auto layout"
+//       className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
+//       onClick={() => {
+//         for (let index = garden.length; index <= maxQuantity; index++) {
+//           addPlanter(`planter${index}`, "#D35832", 1, index, true);
+//         }
+//       }}
+//     >
+//       <Image src={"/icons/layout.svg"} width={30} height={30} alt="add" />
+//     </button>
+//   );
+// };
+// const Add = () => {
+//   const state = useStateStore();
+//   return (
+//     <button
+//       title="add planter"
+//       className="text-white bg-[#2F322B] rounded-full flex py-2 px-8 gap-4 items-center justify-center text-lg"
+//       onClick={() => {
+//         state.addPlanter(`plant ${state.activeIndex + 1}`, "#D35832", 1, state.activeIndex + 1, true);
+//       }}
+//     >
+//       Add Planter
+//       <Image src={"/icons/add-white.svg"} width={30} height={30} alt="add" />
+//     </button>
+//   );
+// };
+
 const Quantity = () => {
-  const { setQuantity, setMaxQuantity, width, height } = useStateStore();
+  const { setQuantity, setMaxQuantity, width, height, maxQuantity, addPlanter, garden } = useStateStore();
+  // const { maxQuantity, addPlanter, garden } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(0);
-  const quantities = []; 
-  for (let index = 2; index <= (width * height) / 20; index+=2) {
+  const quantities = [];
+  for (let index = 2; index <= (width * height) / 20; index += 2) {
     quantities.push(index);
   }
 
@@ -105,7 +109,11 @@ const Quantity = () => {
                   setMaxQuantity(value + 1);
                 }}
               >
-                {value}
+                <div onClick={() => {
+                  for (let index = garden.length; index <= maxQuantity; index++) {
+                    addPlanter(`planter${index}`, "#D35832", 1, index, true);
+                  }
+                }}>{value}</div>
               </div>
             );
           })}
@@ -243,12 +251,12 @@ const Title = () => {
   // const [shouldChange, setShouldChange] = useState(false);
   const inputEl = useRef(null);
   return (
-    <div className={`w-full min-h-[10%] flex justify-between items-center border-b-2 border-y-gray-300 py-4 p-4`}>
+    <div className={`w-full min-h-[10%] flex justify-between items-center border-b-2 border-y-gray-300 py-2 px-4`}>
       <div className="flex gap-8">
-        <div className="text-xl text-gray-600 capitalize">Title</div>
+        <div className="text-base text-gray-600 capitalize">Title</div>
         <input
           type="text"
-          className="text-xl capitalize text-brGreen"
+          className="text-base capitalize text-brGreen"
           value={title}
           disabled={false}
           ref={inputEl}
@@ -262,22 +270,22 @@ const Title = () => {
 const Size = () => {
   const setGardenWidth = useStateStore((state) => state.changeWidth);
   const setGardenHeight = useStateStore((state) => state.changeHeight);
-  const setMaxQuantity  = useStateStore((state) => state.setMaxQuantity); 
+  const setMaxQuantity = useStateStore((state) => state.setMaxQuantity);
   const [width, setWidth] = useState(20);
   const [height, setHeight] = useState(20);
 
   useEffect(() => {
-    setMaxQuantity((width * height) /20)
+    setMaxQuantity((width * height) / 20)
   }, [])
   const handleWidthChange = (value) => {
     setWidth(value.target.value);
     setGardenWidth(width);
-    setMaxQuantity((width * height) /20)
+    setMaxQuantity((width * height) / 20)
   };
   const handleHeightChange = (value) => {
     setHeight(value.target.value);
     setGardenHeight(height);
-    setMaxQuantity((width * height) /20)
+    setMaxQuantity((width * height) / 20)
   };
   return (
     <Section title={"garden size"}>
@@ -308,14 +316,14 @@ const Size = () => {
 };
 
 const Section = ({ children, title }) => {
-  const {activeTab, setActiveTab} = useTabStore();
+  const { activeTab, setActiveTab } = useTabStore();
   const [closed, setClosed] = useState(activeTab !== title);
   useEffect(() => {
-      setClosed(activeTab !== title)
+    setClosed(activeTab !== title)
   }, [activeTab])
   return (
     <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-4 ${closed ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
-      <button className="flex justify-between items-center" onClick={() => {setClosed((state) => !state); setActiveTab(title)}}>
+      <button className="flex justify-between items-center" onClick={() => { setClosed((state) => !state); setActiveTab(title) }}>
         <div className="text-lg text-gray-600 capitalize">{title}</div>
         <Image src={"/icons/expand.svg"} width={30} height={30} alt="expand" className={` transition-transform ${closed ? "-rotate-90" : ""}`} />
       </button>
