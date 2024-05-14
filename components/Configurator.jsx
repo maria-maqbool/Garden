@@ -6,12 +6,11 @@ import Link from 'next/link'
 
 const Configurator = () => {
   return (
-    <div className="no-scrollbar flex overflow-y-scroll absolute right-20 bottom-10 top-100 z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[85vh]">
+    <div className="no-scrollbar flex overflow-y-scroll absolute right-20 bottom-10 top-[80px] z-10 flex-col bg-white justify-between w-1/4  rounded-3xl h-[85vh] ">
       <div>
-        <div className="w-full h-20 bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-lg">
+        <div className="w-full h-15 bg-brGreen rounded-t-3xl text-white flex items-center justify-between p-4 text-lg">
           <PlantName />
         </div>
-
         <Title />
         <Size />
         <Quantity />
@@ -25,7 +24,7 @@ const Configurator = () => {
           <AutoLayout />
           <Add />
         </div> */}
-        <div className=" w-full h-20 bg-brGreen rounded-b-3xl text-white flex items-center justify-center p-2 text-base">
+        <div className=" w-full h-15 bg-brGreen rounded-b-3xl text-white flex items-center justify-center p-2 text-base">
           <Overview />
         </div>
       </div>
@@ -251,7 +250,7 @@ const Title = () => {
   // const [shouldChange, setShouldChange] = useState(false);
   const inputEl = useRef(null);
   return (
-    <div className={`w-full min-h-[10%] flex justify-between items-center border-b-2 border-y-gray-300 py-2 px-4`}>
+    <div className={`w-full min-h-[10%] flex justify-between items-center border-b-2 border-y-gray-300 py-3 px-4`}>
       <div className="flex gap-8">
         <div className="text-base text-gray-600 capitalize">Title</div>
         <input
@@ -263,7 +262,7 @@ const Title = () => {
           onChange={(value) => setTitle(value.target.value)}
         />
       </div>
-      <Image src={"/icons/edit.svg"} width={30} height={30} alt="edit" className="cursor-pointer" onClick={() => inputEl.current.focus()} />
+      <Image src={"/icons/edit.svg"} width={20} height={20} alt="edit" className="cursor-pointer" onClick={() => inputEl.current.focus()} />
     </div>
   );
 };
@@ -288,7 +287,7 @@ const Size = () => {
     setMaxQuantity((width * height) / 20)
   };
   return (
-    <Section title={"garden size"}>
+    <Section className="text-sm" title={"garden size"} >
       <div className="flex gap-2 my-2 text-gray-500">
         <div className="flex flex-col gap-4">
           <p className="">Height</p>
@@ -322,9 +321,9 @@ const Section = ({ children, title }) => {
     setClosed(activeTab !== title)
   }, [activeTab])
   return (
-    <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-4 ${closed ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
+    <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-2 ${closed ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
       <button className="flex justify-between items-center" onClick={() => { setClosed((state) => !state); setActiveTab(title) }}>
-        <div className="text-lg text-gray-600 capitalize">{title}</div>
+        <div className="text-sm text-gray-600 capitalize">{title}</div>
         <Image src={"/icons/expand.svg"} width={30} height={30} alt="expand" className={` transition-transform ${closed ? "-rotate-90" : ""}`} />
       </button>
       <div className={`${closed ? "max-h-0" : "max-h-50"} transition-all overflow-hidden`}>{children}</div>
