@@ -3,12 +3,13 @@ import Link from "next/link";
 import Image from "next/image";
 
 const Navbar = () => {
+
   return (
-    <div className="flex gap-8 justify-around items-center py-2 px-8 w-screen text-white bg-brGreen">
+    <div className="flex gap-8 justify-around items-center py-2 md:px-8 sm:px-6 px-4 w-screen text-white bg-brGreen" >
       <Promo icon={"shipping"} text={"free delivery"} />
       <Promo icon={"payment"} text={"secure payments"} />
       <SearchBar />
-      <div className="flex gap-8">
+      <div className="flex lg:gap-8 md:gap-5 sm:gap-3 gap-1">
         <Button icon={"user"} href={"/user"} />
         <Button icon={"heart"} href={"/heart"} />
         <Button icon={"shopping_bag"} href={"/bag"} />
@@ -25,29 +26,31 @@ const Button = ({ icon, href }) => {
           width={40}
           height={40}
           alt={icon}
-          className="object-cover"
+          className="object-cover lg:w-[40px] md:w-[35px] sm:w-[32px] w-[30px]"
         />
       </Link>
     </div>
   );
 };
+
 const Promo = ({ icon, text }) => {
   return (
-    <div className="flex gap-2 justify-center items-center text-lg">
+    <div className="flex gap-2 justify-center items-center text-sm sm:text-lg">
       <Image
         src={`/icons/${icon}.svg`}
         width={30}
         height={30}
         alt={icon}
-        className="object-cover"
+        className="object-cover hidden sm:block"
       />
       <div className="capitalize">{text}</div>
     </div>
   );
 };
+
 const SearchBar = () => {
   return (
-    <div className="flex flex-grow justify-center items-center text-black">
+    <div className="lg:flex md:hidden sm:hidden flex-grow justify-center items-center text-black hidden ">
       <input
         className="p-2 px-6 w-full rounded-l-3xl placeholder:text-gray-500"
         placeholder="Search"

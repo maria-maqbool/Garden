@@ -7,8 +7,8 @@ import Ground from "./Ground";
 import { Planter } from "./Planter";
 
 const Scene = () => (
-  <div className="flex-grow w-4/5 -z-0">
-    <Canvas camera={{ position: [100, 10, 0], zoom: 7 }}>
+  <div className="flex-grow w-[70%] sm:w-[80%] md:w-[80%] lg:w-4/5 m-auto sm:m-auto md:m-auto lg:mr-[20%] -z-0">
+    <Canvas camera={{ position: [100, 10, 0], zoom: 5 }}>
       {/* <Stats /> */}
       <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 3} />
 
