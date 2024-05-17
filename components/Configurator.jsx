@@ -9,11 +9,11 @@ const Configurator = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className={`${toggle ? "top-[80px]" : "top-[98vh]"} no-scrollbar flex overflow-y-scroll absolute right-0 sm:right-0 md:right-0 lg:right-[30px]  bottom-10 sm:bottom-10 md:bottom-10 lg:top-[80px] z-10 flex-col bg-white justify-between w-full sm:w-full md:w-full lg:w-1/4  rounded-3xl h-[67vh] sm:h-[67vh] md:h-[67vh] lg:h-[76vh]`}>
-      <div className="relative">
+    <>
+    <div onClick={() => setToggle(!toggle)} className="block sm:block md:block lg:hidden absolute left-[45%] bottom-[1px]  w-[70px] h-[8px] bg-[#474545] rounded z-20"></div>
+    <div className={`${toggle ? "top-[80px]" : "top-[98vh]"} no-scrollbar flex overflow-y-scroll absolute right-0 sm:right-0 md:right-0 lg:right-[30px]  bottom-10 sm:bottom-10 md:bottom-10 lg:top-[100px] z-10 flex-col w-full sm:w-full md:w-full lg:w-1/4 lg:min-w-72 lg:max-w-80`}>
+      <div className="relative  bg-white rounded-3xl">
         <div className="w-full h-15 bg-brGreen rounded-t-3xl text-white flex items-center flex-col p-4 text-lg ">
-          {/* <Image onClick={() =>setToggle(!toggle) }  className="block sm:hidden absolute top-[-25px]"  src={"/icons/horizontal_line.svg"} width={60} height={40} alt="toggle" />   */}
-          <div onClick={() => setToggle(!toggle)} className="block sm:block md:block lg:hidden absolute top-[3px] w-[70px] h-[5px] bg-[#b8b5b5] rounded "></div>
           <PlantName className="pb-6" />
         </div>
         <Title />
@@ -22,9 +22,7 @@ const Configurator = () => {
         <Color />
         <PlanterSize />
         <Trolley />
-      </div>
-
-      <div className="flex flex-col gap-4 w-full mt-12">
+        <div className="flex flex-col gap-4 w-full mt-[-1px]">
         {/* <div className="flex gap-4 justify-center items-center w-full">
           <AutoLayout />
           <Add />
@@ -33,7 +31,9 @@ const Configurator = () => {
           <Overview />
         </div>
       </div>
+      </div>
     </div>
+    </>
   );
 };
 const Overview = () => {
