@@ -1,13 +1,20 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from 'next/navigation'
 
 const Navbar = () => {
-
+  const pathname = usePathname();
   return (
     <div className="flex gap-8 justify-around items-center py-2 md:px-8 sm:px-6 px-4 w-screen text-white bg-brGreen" >
+      {
+        pathname === '/' ? (<Link className='border border-[#e7e5df] p-1 px-4 bg-[transparent] rounded-2xl text-[white]' href={'/design'} >START DESIGNING</Link>) : 
+        (<Link className='border border-[#e7e5df] p-1 px-4 bg-[transparent] rounded-2xl text-[white]' href={'/'} >Go TO Home</Link>)
+      }
+      {/* <Link  className='border border-[#e7e5df] p-1 px-4 bg-[transparent] rounded-2xl text-[white]' href={'/design'} >START DESIGNING</Link> */}
       <Promo icon={"shipping"} text={"free delivery"} />
-      <Promo icon={"payment"} text={"secure payments"} />
+      {/* <Promo icon={"payment"} text={"secure payments"} /> */}
       <SearchBar />
       <div className="flex lg:gap-8 md:gap-5 sm:gap-3 gap-1">
         <Button icon={"user"} href={"/user"} />

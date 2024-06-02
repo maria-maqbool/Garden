@@ -23,12 +23,10 @@ const Scene = () => {
   function getZoomLevel() {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth;
-      if (width < 640) return 2; // small screens
-      if (width < 1024) return 4; // medium screens
-      return 7; // large screens
+      if (width < 640) return 3; 
+      if (width < 1024) return 5; 
+      return 7;
     }
-   
-    // Return a default value if window is not available (e.g., during server-side rendering)
     return 7; 
   }
 
@@ -54,18 +52,18 @@ const Plants = () => {
   return (
     <>
       {garden.garden.map((planter, index) => {
-        if(index > garden.maxQuantity) return null; 
+        // if(index > garden.maxQuantity) return null; 
         const planterIndex = index * 3;
         if (planterIndex >= garden.height * row) {
           row += 1;
         }
-        console.log(garden.maxQuantity);
-        const xOffset = - row * 4 + garden.width / 2 ;
+        const xOffset = - row * 4 + garden.width / 2;
         let yOffset = planterIndex - row * garden.height;
-        yOffset += garden.height / 2;
+        yOffset += -1 + garden.height / 2;
 
         return (
           <>{index < garden.maxQuantity && <DragControls axisLock={"y"}>
+            {index}
             <Planter position={[xOffset, 0.6, yOffset]} scale={planter.size * 0.4} color={planter.color} index={index} trolley={planter.trolley} />
           </DragControls>}</>
         );
