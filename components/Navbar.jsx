@@ -9,9 +9,11 @@ const Navbar = () => {
   return (
     <div className="flex gap-8 justify-around items-center py-2 md:px-8 sm:px-6 px-4 w-screen text-white bg-brGreen" >
       {
-        pathname === '/' ? (<Link className='border border-[#e7e5df] p-1 px-4 bg-[transparent] rounded-2xl text-[white]' href={'/design'} >START DESIGNING</Link>) : 
-        (<Link className='border border-[#e7e5df] p-1 px-4 bg-[transparent] rounded-2xl text-[white]' href={'/'} >Go TO Home</Link>)
+        pathname === '/' ? (<Link className='border border-[#e7e5df] lg:px-4 md:px-3 sm:px-2 px-2 p-1 text-xs lg:text-sm bg-[transparent] rounded-2xl text-[white]' href={'/design'} >START DESIGN</Link>) : 
+        (<Link className='border border-[#e7e5df] p-1 px-4 bg-[transparent] rounded-2xl text-[white]' href={'/'} >Home</Link>)
       }
+
+      
       {/* <Link  className='border border-[#e7e5df] p-1 px-4 bg-[transparent] rounded-2xl text-[white]' href={'/design'} >START DESIGNING</Link> */}
       <Promo icon={"shipping"} text={"free delivery"} />
       {/* <Promo icon={"payment"} text={"secure payments"} /> */}

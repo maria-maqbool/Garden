@@ -2,7 +2,7 @@
 import { useStateStore } from "@/stores/store";
 import { DragControls, Environment, OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import Ground from "./Ground";
 import { Planter } from "./Planter";
 

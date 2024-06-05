@@ -11,17 +11,19 @@ const Configurator = () => {
   return (
     <>
     <div onClick={() => setToggle(!toggle)} className="block sm:block md:block lg:hidden absolute left-[45%] bottom-[1px]  w-[70px] h-[8px] bg-[#474545] rounded z-20"></div>
-    <div className={`${toggle ? "top-[80px]" : "top-[98vh]"} no-scrollbar flex overflow-y-scroll absolute right-0 sm:right-0 md:right-0 lg:right-[30px]  bottom-10 sm:bottom-10 md:bottom-10 lg:top-[100px] z-10 flex-col w-full sm:w-full md:w-full lg:w-1/4 lg:min-w-72 lg:max-w-80`}>
+    <div className={`${toggle ? "top-[80px]" : "top-[98vh]"} no-scrollbar  flex overflow-y-scroll absolute right-0 sm:right-0 md:right-0 lg:right-[30px]  bottom-10 sm:bottom-10 md:bottom-10 lg:top-[100px] z-10 flex-col w-full sm:w-full md:w-full lg:w-1/4 lg:min-w-72 lg:max-w-80`}>
       <div className="relative  bg-white rounded-3xl">
         <div className="w-full h-15 bg-brGreen rounded-t-3xl text-white flex items-center flex-col p-4 text-lg ">
           <PlantName className="pb-6" />
         </div>
-        <Title />
-        <Size />
-        <Quantity />
-        <Color />
-        <PlanterSize />
-        <Trolley />
+        <div className="max-h-[290px] overflow-auto configurator-scrollbar ">
+          <Title />
+          <Size />
+          <Quantity />
+          <Color />
+          <PlanterSize />
+          <Trolley />
+        </div>
         <div className="flex flex-col gap-4 w-full mt-[-1px]">
         {/* <div className="flex gap-4 justify-center items-center w-full">
           <AutoLayout />
@@ -196,13 +198,13 @@ const Color = () => {
   const [selected, setSelected] = useState("black");
   const colors = [
     { name: "black", hex: "#000" },
-    { name: "Terracotta", hex: "#D35832" },
+    { name: "Orange", hex: "#D35832" },
     { name: "Stone", hex: "#A8A5A1" },
   ];
   const colorEl = useRef(null);
   return (
     <Section title={"planter color"}>
-      <div className="flex gap-8 mt-4">
+      <div className="flex gap-4 mt-4">
         {colors.map((color, index) => {
           return (
             <div
@@ -213,7 +215,7 @@ const Color = () => {
               }}
             >
               <div
-                className={`w-12 h-12 rounded-full ${selected === color.name ? "border-4 border-white" : ""}`}
+                className={`w-8 h-8 rounded-full ${selected === color.name ? "border-0 border-gray" : ""}`}
                 key={index}
                 style={{ backgroundColor: color.hex }}
               />
@@ -221,7 +223,6 @@ const Color = () => {
             </div>
           );
         })}
-
         <div
           className="flex flex-col gap-2 justify-center items-center"
           onClick={() => {
@@ -237,8 +238,7 @@ const Color = () => {
               setSelected(null);
             }}
           />
-          <Image src={"/icons/add.svg"} width={30} height={30} alt="add" className="w-12 h-12 rounded-full cursor-pointer" />
-
+          <Image src={"/icons/add.svg"} width={30} height={30} alt="add" className="w-8 h-8 rounded-full cursor-pointer" />
           <p className="text-gray-500 capitalize">other</p>
         </div>
       </div>
