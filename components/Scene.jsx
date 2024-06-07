@@ -33,7 +33,6 @@ const Scene = () => {
 
 return(
   <div className="flex-grow w-[100%] sm:w-[100%] md:w-[100%] lg:w-4/5 m-auto sm:m-auto md:m-auto lg:mr-[20%] -z-0 h-full">
-    {console.log("zoom:", zoom)}
     <Canvas camera={{ position: [100, 10, 0], zoom: zoom }} key={zoom}>
       {/* <Stats /> */}
       <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 3} />
