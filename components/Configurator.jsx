@@ -91,14 +91,38 @@ const PlantName = () => {
 // };
 
 const Quantity = () => {
-  const { setQuantity, setMaxQuantity, width, height, maxQuantity, addPlanter, garden } = useStateStore();
+  const { setQuantity, setMaxQuantity, width, height, maxQuantity, addPlanter, garden, resetPlanter } = useStateStore();
   // const { maxQuantity, addPlanter, garden } = useStateStore();
   const [selectedOption, setSelectedOption] = useState(0);
   const quantities = [];
   for (let index = 2; index <= (width * height) / 20; index += 2) {
     quantities.push(index);
   }
+  useEffect( ()=> {
+    if(selectedOption > 0) {
+      console.log("selectedOption: ", selectedOption);
+      resetPlanter();
+      Array.from(Array(selectedOption).keys()).forEach(index => {
+        addPlanter(`planter${index+1}`, "#D35832", 1, index+1, true);
+      });
+      // for (let index = 0; index < selectedOption; index++) {
+      //   addPlanter(`planter${index}`, "#D35832", 1, index, true);
+      // }
+    }
+    // console.log("garden: ", garden);
+    // Array.from(Array(selectedOption).keys()).forEach(element => {
+    //   console.log("element: ", element);
+    // });
 
+  }, [selectedOption])
+
+
+
+  // onClick={() => {
+  //   for (let index = garden.length; index <= maxQuantity; index++) {
+  //     addPlanter(`planter${index}`, "#D35832", 1, index, true);
+  //   }
+  // }}
   return (
     <Section title={"number of Quantity of planter"}>
       <div className="flex flex-col gap-2 mt-4 text-gray-500">
@@ -110,16 +134,14 @@ const Quantity = () => {
                 key={index}
                 className={`${selectedOption === value ? "bg-brGreen text-white" : "text-gray-700"} rounded-full px-3 py-1 text-sm font-semibold  mr-2`}
                 onClick={() => {
-                  setSelectedOption(value);
                   setQuantity(value);
                   setMaxQuantity(value + 1);
+                  setSelectedOption(value);
                 }}
               >
-                <div onClick={() => {
-                  for (let index = garden.length; index <= maxQuantity; index++) {
-                    addPlanter(`planter${index}`, "#D35832", 1, index, true);
-                  }
-                }}>{value}</div>
+                <div>
+                  {value}
+                </div>
               </div>
             );
           })}

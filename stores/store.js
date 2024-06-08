@@ -57,6 +57,10 @@ export const useStateStore = create((set, get) => ({
     set((state) => ({
       garden: state.garden.filter((item, _i) => item.name !== name),
     })),
+    resetPlanter: () =>
+      set((state) => ({
+        garden: [...initialState],
+      })),
   activeIndex: 0,
   setActive: (index) => set(() => ({ activeIndex: index })),
   width: 20,

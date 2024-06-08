@@ -15,7 +15,10 @@ const LandingPage = () => {
                         <li>Customise, visualise, and send your design to your closest retailer for quotation.</li>
                     </ul>
                     {/* <button  className='my-4 p-1 px-4 bg-[#FFC03C] rounded-2xl' onClick={() => router.push('/design')}>START DESIGNING</button> */}
-                    <Link  className='lg:px-4 md:px-3 sm:px-2 px-2 p-1  bg-[#FFC03C] rounded-2xl lg:text-sm text-xs ' href={'/design'} >START DESIGNING</Link>
+                    {/* <Link  className='lg:px-4 md:px-3 sm:px-2 px-2 p-2  bg-[#FFC03C] rounded-2xl lg:text-sm text-xs ' href={'/design'} >START DESIGNING</Link> */}
+                    <Link className='lg:px-4 md:px-3 sm:px-2 px-2 p-2 bg-[#FFC03C] rounded-2xl lg:text-sm text-xs hover:bg-[#e0a825] hover:text-white transition duration-300' href={'/design'} >
+                        START DESIGNING
+                    </Link>
                 </div>
                 <div className='lg:w-2/3 md:w-full sm:w-full  w-full'>
                     <img className='w-full h-full' src="/assets/garden.gif" alt="Design" />
