@@ -25,14 +25,14 @@ const Scene = () => {
       const width = window.innerWidth;
       if (width < 640) return 3; 
       if (width < 1024) return 5; 
-      return 7;
+      return 8;
     }
     return 7; 
   }
 
 
 return(
-  <div className="flex-grow w-[100%] sm:w-[100%] md:w-[100%] lg:w-4/5 m-auto sm:m-auto md:m-auto lg:mr-[20%] -z-0 h-full">
+  <div className=" flex-grow w-[100%] sm:w-[100%] md:w-[100%] lg:w-4/5 m-auto sm:m-auto md:m-auto lg:mr-[20%] -z-0 h-full">
     <Canvas camera={{ position: [100, 10, 0], zoom: zoom }} key={zoom}>
       {/* <Stats /> */}
       <OrbitControls makeDefault minPolarAngle={0} maxPolarAngle={Math.PI / 3} />

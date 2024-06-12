@@ -7,6 +7,8 @@ import Link from 'next/link'
 const Configurator = () => {
 
   const [toggle, setToggle] = useState(false);
+  
+
 
   return (
     <>
@@ -159,8 +161,15 @@ const Trolley = () => {
     { title: "With trolley", value: true },
     { title: "Without trolley", value: false },
   ];
+
+  const  scrollToBottom = () => {
+    // var scrollableDiv = document.getElementById('scrollable-div');
+    // scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+    console.log("Scroll To Bottom");
+}
+
   return (
-    <Section title={"Inclusion"}>
+    <Section title={"Inclusion"} >
       <div className="flex flex-col gap-2 mt-4 text-gray-500">
         <div className="cursor-pointer">
           {quantities.map((value, index) => {
@@ -345,6 +354,10 @@ const Section = ({ children, title }) => {
   const { activeTab, setActiveTab } = useTabStore();
   const [closed, setClosed] = useState(activeTab !== title);
   useEffect(() => {
+    if(activeTab === 'Inclusion') {
+      const x = document.getElementsByClassName('configurator-scrollbar')[0];
+      x.scrollTo(0, x.scrollHeight);
+    } 
     setClosed(activeTab !== title)
   }, [activeTab])
   return (
