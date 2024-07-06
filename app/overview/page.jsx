@@ -21,7 +21,7 @@ const Details = () => {
           <div className="w-1/3">Color</div>
           <div className="w-1/3">Trolley</div>
         </div>
-        <div className="h-64 overflow-auto w-full configurator-scrollbar "> 
+        <div className="w-full"> 
         {state.garden.map((value, index) => (
               <div key={value.name} className="flex p-4 w-full lg:text-xl md:text-lg sm:text-base text-sm text-center border-b border-black">
                 <div className="w-1/3">{value.name} </div>

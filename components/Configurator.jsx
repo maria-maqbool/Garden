@@ -13,12 +13,12 @@ const Configurator = () => {
   return (
     <>
     <div onClick={() => setToggle(!toggle)} className="block sm:block md:block lg:hidden absolute left-[45%] bottom-[1px]  w-[70px] h-[8px] bg-[#474545] rounded z-20"></div>
-    <div className={`${toggle ? "top-[80px]" : "top-[98vh]"} no-scrollbar  flex overflow-y-scroll absolute right-0 sm:right-0 md:right-0 lg:right-[30px]  bottom-10 sm:bottom-10 md:bottom-10 lg:top-[100px] z-10 flex-col w-full sm:w-full md:w-full lg:w-1/4 lg:min-w-72 lg:max-w-80`}>
+    <div className={`${toggle ? "top-[80px]" : "top-[98vh]"} flex overflow-y-auto absolute right-0 sm:right-0 md:right-0 lg:right-[30px]  bottom-10 sm:bottom-10 md:bottom-10 lg:top-[100px] z-10 flex-col w-full sm:w-full md:w-full lg:w-1/4 lg:min-w-72 lg:max-w-80 ml-4 pr-2 configurator-scrollbar`}>
       <div className="relative  bg-white rounded-3xl">
         <div className="w-full h-15 bg-brGreen rounded-t-3xl text-white flex items-center flex-col p-4 text-lg ">
           <PlantName className="pb-6" />
         </div>
-        <div className="max-h-[290px] overflow-auto configurator-scrollbar ">
+        <div className="overflow-auto">
           <Title />
           <Size />
           <Quantity />
@@ -35,8 +35,8 @@ const Configurator = () => {
           <Overview />
         </div>
       </div>
-      </div>
     </div>
+  </div>
     </>
   );
 };
@@ -353,13 +353,13 @@ const Size = () => {
 const Section = ({ children, title }) => {
   const { activeTab, setActiveTab } = useTabStore();
   const [closed, setClosed] = useState(activeTab !== title);
-  useEffect(() => {
-    if(activeTab === 'Inclusion') {
-      const x = document.getElementsByClassName('configurator-scrollbar')[0];
-      x.scrollTo(0, x.scrollHeight);
-    } 
-    setClosed(activeTab !== title)
-  }, [activeTab])
+  // useEffect(() => {
+  //   if(activeTab === 'Inclusion') {
+  //     const x = document.getElementsByClassName('configurator-scrollbar')[0];
+  //     x.scrollTo(0, x.scrollHeight);
+  //   } 
+  //   setClosed(activeTab !== title)
+  // }, [activeTab])
   return (
     <div className={`w-full min-h-[10%] flex flex-col border-b-2 border-y-gray-300 py-2 ${closed ? "bg-white" : "bg-gray-100"} transition-colors p-4`}>
       <button className="flex justify-between items-center" onClick={() => { setClosed((state) => !state); setActiveTab(title) }}>
